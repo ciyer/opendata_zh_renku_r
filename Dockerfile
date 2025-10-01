@@ -21,4 +21,3 @@ RUN mamba env update -q -f /tmp/environment.yml && \
     mamba clean -y --all && \
     mamba env export -n "root" && \
     rm -rf ${HOME}/.renku/venv
-COPY src/opendata.py src/get_dataset_type.py /bin/opendata/
