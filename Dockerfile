@@ -7,11 +7,10 @@ FROM renku/renkulab-r:4.3.1-0.25.0
 # e.g. the following installs apt-utils and vim; each pkg on its own line, all lines
 # except for the last end with backslash '\' to continue the RUN line
 #
-# USER root
-# RUN apt-get update && \
-#    apt-get install -y --no-install-recommends \
-#    apt-utils \
-#    vim
+USER root
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libudunits2-dev
 # USER ${NB_USER}
 
 # install the python dependencies
@@ -21,3 +20,4 @@ RUN mamba env update -q -f /tmp/environment.yml && \
     mamba clean -y --all && \
     mamba env export -n "root" && \
     rm -rf ${HOME}/.renku/venv
+RUN R -e "install.packages(c('sf', 'skimr'), repos='https://cloud.r-project.org')"
